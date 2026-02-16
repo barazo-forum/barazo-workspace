@@ -6,7 +6,9 @@
 /barazo-website/
 
 # Org-level .github repo (independently tracked)
-/.github/
+# Allow .github/workflows/ in this repo for CI triggers
+/.github/*
+!/.github/workflows/
 
 # Claude Code (private per-machine)
 CLAUDE.md
