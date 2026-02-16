@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: barazo
+      POSTGRES_PASSWORD: barazo_dev
+      POSTGRES_DB: barazo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U barazo"]
+      interval: 10s
+      retries: 5
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkeydata:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      retries: 3
+
+  tap:
+    image: ghcr.io/bluesky-social/indigo/tap:latest
+    platform: linux/amd64
+    ports:
+      - "2480:2480"
+    environment:
+      TAP_RELAY_URL: https://bsky.network
+      TAP_SIGNAL_COLLECTION: forum.barazo.topic.post
+      TAP_COLLECTION_FILTERS: forum.barazo.topic.post,forum.barazo.topic.reply,forum.barazo.interaction.reaction
+      TAP_DATABASE_URL: sqlite:///data/tap.db
+      TAP_ADMIN_PASSWORD: tap_dev_secret
+    volumes:
+      - tapdata:/data
+
+volumes:
+  pgdata:
+  valkeydata:
+  tapdata:

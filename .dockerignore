@@ -1,0 +1,37 @@
+# Ignore all node_modules (Docker builds install fresh)
+**/node_modules
+**/.next
+**/dist
+**/coverage
+
+# Git
+.git
+.gitignore
+
+# Tests (not needed in Docker builds)
+**/tests
+**/vitest.config.ts
+**/vitest.config.integration.ts
+
+# IDE and editor files
+**/.vscode
+**/.idea
+
+# Environment files (secrets must not be baked in)
+**/.env
+**/.env.*
+
+# Non-essential repos for Docker builds
+barazo-deploy/
+barazo-website/
+poc/
+seed/
+
+# Build artifacts
+**/*.tsbuildinfo
+
+# Documentation (not needed in images)
+**/README.md
+**/LICENSE
+**/CLAUDE.md
+**/docs/

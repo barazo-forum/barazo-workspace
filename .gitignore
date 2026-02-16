@@ -1,0 +1,37 @@
+# Sub-project repos (independently tracked)
+/barazo-api/
+/barazo-web/
+/barazo-lexicons/
+/barazo-deploy/
+/barazo-website/
+
+# Org-level .github repo (independently tracked)
+/.github/
+
+# Claude Code (private per-machine)
+CLAUDE.md
+.claude/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Build artifacts
+dist/
+.turbo/
+*.tsbuildinfo
+
+# OS
+.DS_Store
+
+# Prototypes (not shipped)
+poc/
+
+# Worktrees (local development)
+.worktrees/
+
+# Obsidian workspace docs (tracked in Obsidian)
+decisions/
