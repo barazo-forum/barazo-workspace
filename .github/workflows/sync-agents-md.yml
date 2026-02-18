@@ -13,6 +13,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         repo:
           - barazo-api
@@ -66,4 +67,5 @@ jobs:
             --head "$BRANCH" \
             --base main)
 
-          gh pr merge "$PR_URL" --squash --auto
+          # Auto-merge if enabled; log warning if not available
+          gh pr merge "$PR_URL" --squash --auto || echo "::warning::Auto-merge not available for ${{ matrix.repo }}. PR created for manual merge."
