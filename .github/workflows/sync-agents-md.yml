@@ -1,0 +1,69 @@
+name: Sync AGENTS.md
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents-md/**'
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly Monday 6am UTC
+  workflow_dispatch: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo:
+          - barazo-api
+          - barazo-web
+          - barazo-lexicons
+          - barazo-deploy
+          - barazo-website
+    steps:
+      - name: Checkout barazo-workspace
+        uses: actions/checkout@v4
+
+      - name: Build AGENTS.md
+        run: ./agents-md/build.sh
+
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          repository: barazo-forum/${{ matrix.repo }}
+          token: ${{ secrets.SYNC_TOKEN }}
+          path: target-repo
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if diff -q agents-md/dist/${{ matrix.repo }}.md target-repo/AGENTS.md 2>/dev/null; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create PR with updated AGENTS.md
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          cd target-repo
+          BRANCH="chore/sync-agents-md-$(date +%Y%m%d-%H%M)"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "$BRANCH"
+          cp ../agents-md/dist/${{ matrix.repo }}.md AGENTS.md
+          git add AGENTS.md
+          git commit -m "docs: sync AGENTS.md from barazo-workspace"
+
+          git push -u origin "$BRANCH"
+          PR_URL=$(gh pr create \
+            --title "docs: sync AGENTS.md from barazo-workspace" \
+            --body "Auto-generated from [barazo-workspace/agents-md](https://github.com/barazo-forum/barazo-workspace/tree/main/agents-md). Do not edit AGENTS.md directly in this repo." \
+            --head "$BRANCH" \
+            --base main)
+
+          gh pr merge "$PR_URL" --squash --auto
