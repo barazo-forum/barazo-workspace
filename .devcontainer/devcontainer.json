@@ -1,0 +1,34 @@
+{
+  "name": "Barazo Development",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000, 3100, 5432, 6379],
+  "portsAttributes": {
+    "3000": { "label": "Barazo Web", "onAutoForward": "notify" },
+    "3100": { "label": "Barazo API", "onAutoForward": "notify" },
+    "5432": { "label": "PostgreSQL", "onAutoForward": "silent" },
+    "6379": { "label": "Valkey", "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "corepack enable && pnpm install",
+  "postStartCommand": "pnpm dev:infra",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "vitest.explorer"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.preferences.importModuleSpecifier": "non-relative"
+      }
+    }
+  }
+}
