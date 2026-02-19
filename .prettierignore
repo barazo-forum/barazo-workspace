@@ -1,0 +1,8 @@
+dist/
+node_modules/
+.next/
+coverage/
+*.min.js
+pnpm-lock.yaml
+barazo-api/src/generated/
+barazo-lexicons/src/generated/
