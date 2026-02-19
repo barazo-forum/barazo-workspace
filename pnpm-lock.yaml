@@ -142,6 +142,12 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      '@commitlint/cli':
+        specifier: 'catalog:'
+        version: 20.4.1(@types/node@25.2.3)(typescript@5.9.3)
+      '@commitlint/config-conventional':
+        specifier: 'catalog:'
+        version: 20.4.1
       '@testcontainers/postgresql':
         specifier: ^11.11.0
         version: 11.11.0
@@ -157,6 +163,15 @@ importers:
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
+      husky:
+        specifier: 'catalog:'
+        version: 9.1.7
+      lint-staged:
+        specifier: 'catalog:'
+        version: 16.2.7
+      prettier:
+        specifier: 'catalog:'
+        version: 3.8.1
       supertest:
         specifier: ^7.1.0
         version: 7.2.2
@@ -191,6 +206,12 @@ importers:
       '@atproto/lex-cli':
         specifier: ^0.9.8
         version: 0.9.8
+      '@commitlint/cli':
+        specifier: 'catalog:'
+        version: 20.4.1(@types/node@25.2.3)(typescript@5.9.3)
+      '@commitlint/config-conventional':
+        specifier: 'catalog:'
+        version: 20.4.1
       '@types/node':
         specifier: 'catalog:'
         version: 25.2.3
@@ -200,6 +221,15 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
+      husky:
+        specifier: 'catalog:'
+        version: 9.1.7
+      lint-staged:
+        specifier: 'catalog:'
+        version: 16.2.7
+      prettier:
+        specifier: 'catalog:'
+        version: 3.8.1
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -397,7 +427,7 @@ importers:
         specifier: ^28.1.0
         version: 28.1.0(@noble/hashes@1.8.0)
       lint-staged:
-        specifier: ^16.2.7
+        specifier: 'catalog:'
         version: 16.2.7
       msw:
         specifier: ^2.7.0
@@ -406,7 +436,7 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1(typescript@5.9.3)
       prettier:
-        specifier: ^3.8.1
+        specifier: 'catalog:'
         version: 3.8.1
       tailwindcss:
         specifier: ^4.0.0
