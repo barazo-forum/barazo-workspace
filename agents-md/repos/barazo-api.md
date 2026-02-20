@@ -14,7 +14,7 @@ The AppView backend for Barazo. Subscribes to AT Protocol firehose, indexes `for
 | Runtime | Node.js 24 LTS / TypeScript (strict) |
 | Framework | Fastify |
 | Protocol | @atproto/api, @atproto/oauth-client-node, @atproto/tap |
-| Database | PostgreSQL 16 (Drizzle ORM, Drizzle Kit migrations) |
+| Database | PostgreSQL 16 (Drizzle ORM, Drizzle Kit push) |
 | Cache | Valkey |
 | Testing | Vitest + Supertest |
 | Logging | Pino (structured) |
