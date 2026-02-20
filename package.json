@@ -20,7 +20,10 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "minimatch": ">=10.2.1"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:",
