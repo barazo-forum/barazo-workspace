@@ -1,6 +1,7 @@
 {
   "name": "barazo-workspace",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@10.29.2",
   "scripts": {
     "dev:infra": "docker compose -f barazo-deploy/docker-compose.dev.yml up -d",
