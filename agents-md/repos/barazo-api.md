@@ -39,3 +39,4 @@ The AppView backend for Barazo. Subscribes to AT Protocol firehose, indexes `for
 - Helmet + CSP + HSTS + rate limiting on all endpoints
 - GlitchTip error monitoring from first deployment
 - No raw SQL -- Drizzle ORM with parameterized queries only
+- Accessible error responses -- include human-readable messages and structured error codes to support accessible frontend rendering
