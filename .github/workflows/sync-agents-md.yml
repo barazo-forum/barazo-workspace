@@ -21,6 +21,7 @@ jobs:
           - barazo-lexicons
           - barazo-deploy
           - barazo-website
+          - barazo-docs
     steps:
       - name: Checkout barazo-workspace
         uses: actions/checkout@v4
