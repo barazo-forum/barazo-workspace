@@ -4,13 +4,12 @@ on:
   repository_dispatch:
     types: [sync-lockfile]
   schedule:
-    # Every 6 hours -- catches Dependabot merges in sub-repos
-    - cron: "0 */6 * * *"
+    # Hourly fallback -- catches Dependabot merges and edge cases
+    - cron: "0 * * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   sync:
@@ -59,3 +58,17 @@ jobs:
           git add pnpm-lock.yaml
           git commit -m "fix(deps): auto-sync lockfile with sub-repo dependencies"
           git push origin main
+
+      - name: Trigger staging re-deploy
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.DEPLOY_PAT }}
+          repository: barazo-forum/barazo-deploy
+          event-type: deploy-staging
+          client-payload: |
+            {
+              "trigger_repo": "barazo-workspace",
+              "api_ref": "main",
+              "web_ref": "main"
+            }
