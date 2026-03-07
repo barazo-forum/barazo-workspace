@@ -1,0 +1,27 @@
+{
+  "name": "@barazo/plugin-signatures",
+  "version": "0.1.0",
+  "description": "User signatures below forum posts. Portable via AT Protocol.",
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/backend/routes.js",
+  "exports": {
+    "./plugin.json": "./plugin.json",
+    "./backend/*": "./dist/backend/*.js",
+    "./frontend/*": "./dist/frontend/*.js"
+  },
+  "files": [
+    "dist",
+    "plugin.json"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "fastify": "^5.0.0",
+    "drizzle-orm": "^0.45.0",
+    "zod": "^4.0.0",
+    "react": "^19.0.0"
+  }
+}
