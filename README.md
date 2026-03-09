@@ -125,4 +125,4 @@ See [LICENSE](LICENSE) for full terms.
 
 ---
 
-(c) 2026 Barazo
+Made with ♥ in 🇪🇺 by [Singi Labs](https://singi.dev)
